@@ -37,6 +37,7 @@
     "RunControl": {
         // Iteration control
         "nIter": [100, 100],
+        "nProc": 128,
         "PhaseIters": [0, 200],
         "PhaseSequence": [0, 1],
         // Mode control

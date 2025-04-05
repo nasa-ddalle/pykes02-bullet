@@ -18,7 +18,7 @@
   </ComponentList>
   <BodyHierarchy>
     <Simulation>
-      <CoordinateSystem>default</CoordinateSystem>
+      <CoordinateSystem>xByRzU</CoordinateSystem>
       <MinimumQueueTime>1800</MinimumQueueTime>
       <Name>bullet-inviscid</Name>
       <PartitioningGrouping>Node</PartitioningGrouping>
