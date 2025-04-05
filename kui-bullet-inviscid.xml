@@ -1,0 +1,137 @@
+<JobInputs featureSet="20230411">
+  <!--Written by version 12.6.1rc1-->
+  <ComponentList>
+    <Component>FirstSentinel</Component>
+    <Component>SimulationControl</Component>
+    <Component>GlobalFluidSettings</Component>
+    <Component>FreestreamConditions</Component>
+    <Component>MeshManager</Component>
+    <Component>InitializeSentinel</Component>
+    <Component>MoveSentinel</Component>
+    <Component>SolveSentinel</Component>
+    <Component>ForcesMomentsCalc</Component>
+    <Component>ExceptionManager</Component>
+    <Component>OutputManager</Component>
+    <Component>TrackFileWriter</Component>
+    <Component>OutputSentinel</Component>
+    <Component>TimeManager</Component>
+  </ComponentList>
+  <BodyHierarchy>
+    <Simulation>
+      <CoordinateSystem>default</CoordinateSystem>
+      <MinimumQueueTime>1800</MinimumQueueTime>
+      <Name>bullet-inviscid</Name>
+      <PartitioningGrouping>Node</PartitioningGrouping>
+      <PartitioningScheme>RIB</PartitioningScheme>
+      <PreFlight>No</PreFlight>
+      <Restart>No</Restart>
+      <RestartDirectory></RestartDirectory>
+      <RestartFrequency>0</RestartFrequency>
+      <RestartKeepOld>0</RestartKeepOld>
+      <Scale>1.0</Scale>
+      <ScaleInputs>Yes</ScaleInputs>
+      <StartupIterations>0</StartupIterations>
+      <StopAtMinimumAltitude>No</StopAtMinimumAltitude>
+      <Units>MKS</Units>
+    </Simulation>
+    <Freestream>
+      <Alpha>0.0</Alpha>
+      <AtmosphereModel>Standard</AtmosphereModel>
+      <Beta>0.0</Beta>
+      <DynamicPressure>1250.0</DynamicPressure>
+      <FlowOrientationKnownInputs>Alpha-Beta</FlowOrientationKnownInputs>
+      <Gravity>-1.0</Gravity>
+      <InitialConditionMode>Freestream</InitialConditionMode>
+      <KnownCond>Mach-q</KnownCond>
+      <Mach>0.8</Mach>
+      <ReynoldsLength>1.0</ReynoldsLength>
+    </Freestream>
+    <GlobalFluid>
+      <ActivateOffBody>No</ActivateOffBody>
+      <Compressible>Yes</Compressible>
+      <EquationSet>Euler</EquationSet>
+      <FlowSolutionOrigin>Native Flow Solver</FlowSolutionOrigin>
+    </GlobalFluid>
+    <DefinitionList>
+      <UnstructuredDefinition def="def1">
+        <CenterOfMass>0.0,0.0,0.0</CenterOfMass>
+        <Mass>0.0</Mass>
+        <MomentOfInertiaXX>0.0</MomentOfInertiaXX>
+        <MomentOfInertiaYY>0.0</MomentOfInertiaYY>
+        <MomentOfInertiaZZ>0.0</MomentOfInertiaZZ>
+        <ProductOfInertiaXY>0.0</ProductOfInertiaXY>
+        <ProductOfInertiaXZ>0.0</ProductOfInertiaXZ>
+        <ProductOfInertiaYZ>0.0</ProductOfInertiaYZ>
+      </UnstructuredDefinition>
+    </DefinitionList>
+    <BodyList>
+      <Body def="def1" name="body1"></Body>
+    </BodyList>
+    <ActionList>
+      <FVMCFD enable="true" name="KCFD">
+        <CFL>1000.0</CFL>
+        <CFLRampFraction>0.0</CFLRampFraction>
+        <CFLStart>100.0</CFLStart>
+        <Iterations>200</Iterations>
+        <RecurrenceType>None</RecurrenceType>
+        <SpatialAccuracy>Second-Order</SpatialAccuracy>
+        <SpatialAccuracyRampFraction>0.0</SpatialAccuracyRampFraction>
+        <Start>0.0</Start>
+        <TemporalDampingAdvection>0.05</TemporalDampingAdvection>
+        <TemporalDampingAdvectionStart>0.5</TemporalDampingAdvectionStart>
+        <TemporalDampingRampFraction>0.0</TemporalDampingRampFraction>
+        <TemporalDampingTransition>-1.0</TemporalDampingTransition>
+        <TemporalDampingTurbulence>-1.0</TemporalDampingTurbulence>
+        <TimeSolutionMode>Steady</TimeSolutionMode>
+        <TransitionSpatialAccuracy>Second-Order</TransitionSpatialAccuracy>
+        <TurbulenceSpatialAccuracy>Second-Order</TurbulenceSpatialAccuracy>
+      </FVMCFD>
+    </ActionList>
+    <OutputSettings>
+      <Backup>No</Backup>
+      <CoordinateSystem>Default Scheme</CoordinateSystem>
+      <CartVisFrequency>Volume Flow Frequency</CartVisFrequency>
+      <FlowSolutionAlwaysWriteMesh>No</FlowSolutionAlwaysWriteMesh>
+      <FlowSolutionFileFormat>TECPLOT</FlowSolutionFileFormat>
+      <MissDistanceFrequency>0</MissDistanceFrequency>
+      <OutputIterDelay>0</OutputIterDelay>
+      <SierraSDOUTPUTContent>Displacement,Force,Strain,Stress</SierraSDOUTPUTContent>
+      <SierraTFAriaOUTPUTContent>Heat Flux,Material Properties,Temperature</SierraTFAriaOUTPUTContent>
+      <StrucSolutionFileFormat>VTK Unstructured (*.vtu)</StrucSolutionFileFormat>
+      <StrucSolutionAscii>No</StrucSolutionAscii>
+      <StrucSolutionBase64>No</StrucSolutionBase64>
+      <StrucSolutionCompression>No</StrucSolutionCompression>
+      <StrucSolutionApplyDisp>Yes</StrucSolutionApplyDisp>
+      <StrucVisFrequency>Volume Flow Frequency</StrucVisFrequency>
+      <ThermVisFrequency>Volume Flow Frequency</ThermVisFrequency>
+      <TimeAveragingVizFileContent>Density,Velocity Vector,Pressure,Temperature</TimeAveragingVizFileContent>
+      <TimeAveragingKeepOld>0</TimeAveragingKeepOld>
+      <TimeAvgUseDefaultVariables>Yes</TimeAvgUseDefaultVariables>
+      <TimeAvgIncludeStdDev>No</TimeAvgIncludeStdDev>
+      <TrackFormat>Tecplot</TrackFormat>
+      <VisualizationFileContent>Density,Velocity Vector,Pressure,Temperature</VisualizationFileContent>
+      <VisualizationFrequencyType>Iteration Based</VisualizationFrequencyType>
+      <VisualizationViewpoint>Fixed</VisualizationViewpoint>
+      <VolVisIterFrequency>0</VolVisIterFrequency>
+      <ReferenceFrame>
+        <Frame>&lt;Inertial&gt;</Frame>
+        <Origin>Mesh Reference Point</Origin>
+        <Source>Frame Body</Source>
+      </ReferenceFrame>
+    </OutputSettings>
+    <OutputList>
+      <BodyTracking enable="true" name="bodyTracking">
+        <Backup>Yes</Backup>
+        <BodyList>body1</BodyList>
+        <TrackingList>CFD Core,CFD Turbulence,Coefficients,Forces and Moments</TrackingList>
+      </BodyTracking>
+    </OutputList>
+    <GasProperties>
+      <GasSpecification>Native Perfect Gas</GasSpecification>
+      <PerfectGas>Air</PerfectGas>
+    </GasProperties>
+    <InitialConditionList>
+      <InitialCondition region="&lt;Entire Domain&gt;"></InitialCondition>
+    </InitialConditionList>
+  </BodyHierarchy>
+</JobInputs>
