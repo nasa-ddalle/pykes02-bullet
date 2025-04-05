@@ -41,11 +41,7 @@
         "PhaseSequence": [0, 1],
         // Mode control
         "qsub": false,
-        "MPI": true,
-        // FUN3D command-line options
-        "nodet": {
-            "animation_freq": 100
-        }
+        "MPI": true
     },
     
     // Component configuration
@@ -69,10 +65,7 @@
         "Components": [
             "bullet_no_base", "bullet_total",
             "cap", "body", "base"
-        ],
-        // Faces in each component
-        "Inputs": {
-        }
+        ]
     },
     
     // Database
@@ -306,7 +299,12 @@
         ],
         // Modify one definition
         "Definitions": {
-            "mach": {"Format": "%.2f"}
+            "mach": {
+                "Format": "%.2f"
+            },
+            "alpha": {
+                "Format": "%04.1f"
+            }
         },
         // Group settings
         "GroupMesh": false,
