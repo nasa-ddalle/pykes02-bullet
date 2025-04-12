@@ -1,18 +1,18 @@
 
-.. _pyfun-ex02-bullet:
+.. _pykes-ex02-bullet:
 
 Demo 2: Inviscid Bullet with Reports
 ====================================
 
-This is a second CAPE/pyfun demo using a bullet shape and demonstrating how to
+This is a second CAPE/pykes demo using a bullet shape and demonstrating how to
 use the inviscid solver in FUN3D.
 
 To get started, clone the repo and run a few short commands:
 
     .. code-block:: console
 
-        $ git clone https://github.com/nasa-ddalle/pyfun02-bullet.git
-        $ cd pyfun02-bullet
+        $ git clone https://github.com/nasa-ddalle/pykes02-bullet.git
+        $ cd pykes02-bullet
         $ ./copy-files.py
         $ cd work/
 
@@ -39,27 +39,25 @@ triangulation, ``bullet.tri``, is shown below.
 The files in this folder are listed below with a short description.  In this
 case, the run matrix is defined within the ``pyFun.json`` file.
 
-    * ``pyFun.json``: Master input control file for pyFun
+    * ``pyKes.json``: Master input control file for pyFun
     * ``matrix.csv``: Run matrix
-    * ``fun3d.nml``: Template namelist file
-    * ``bullet-inviscid.ugrid``: Volume grid, ASCII AFLR3 format
-    * ``bullet-inviscid.mapbc``: Boundary conditions file
-    * ``bullet-far.tri``: (Not used) Cart3D surface triangulation
+    * ``kui-bullet-inviscid.xml``: Template namelist file
+    * ``bullet-inviscid.avm``: Volume grid, CREATE-AV format
+    * ``bullet-inviscid.mapbc``: FUN3D boundary conditions, for reference
     * ``bullet.xml``: XML files used to name each numbered component
-    * ``slice-y0.py``: Python script for use with Paraview
     
 
-.. _pyfun-ex02-run:
+.. _pykes-ex02-run:
     
 Running Cases
 -------------
 Assuming the present working directory is in this demo folder, i.e.
-``pyfun02_bullet``, a good first test command is the following, which checks
+``pykes02_bullet``, a good first test command is the following, which checks
 the status of each case in the matrix.
 
     .. code-block:: console
     
-        $ pyfun -c
+        $ pykes -c
         Case Config/Run Directory  Status  Iterations  Que CPU Time 
         ---- --------------------- ------- ----------- --- --------
         0    bullet/m0.80a0.0b0.0  ---     /           .            
@@ -70,27 +68,13 @@ the status of each case in the matrix.
         ---=24, 
 
 This example contains 24 cases in the run matrix, and the computation time is
-kept low in order to run each case within a few minutes (using the serial
-version of FUN3D).
-
-**NOTE:** The ``pyFun.json`` file provided in this repo attempts to run FUN3D
-in serial mode. Most users will want to run with MPI. To do this, set *MPI*
-to ``true`` in the ``"RunControl"`` section and pick an appropriate number of
-processes to use for *NProc*. For example...
-
-    .. code-block:: javascript
-
-        "RunControl": {
-            ...
-            "MPI": true,
-            "NProc": 40
-        }
+kept low in order to run each case within a few minutes.
 
 Running case number 3 (note zero-based indexing) has the following output.
 
     .. code-block:: console
     
-        $ pyfun -I 3
+        $ pykes -I 3
         Case Config/Run Directory  Status  Iterations  Que CPU Time 
         ---- --------------------- ------- ----------- --- --------
         3    bullet/m0.80a30.0b0.0 ---     /           .            
@@ -111,7 +95,7 @@ We can then check how much CPU time that used.
 
     .. code-block:: console
     
-        $ pyfun -I 3 -c
+        $ pykes -I 3 -c
         Case Config/Run Directory  Status  Iterations  Que CPU Time 
         ---- --------------------- ------- ----------- --- --------
         3    bullet/m0.80a30.0b0.0 DONE    200/200     .        0.1 
@@ -208,10 +192,10 @@ Automated Single-Case Report
 This example is set up to create a report called ``report-case.pdf`` in the
 ``report/`` folder.  It includes a couple of summary tables, 8 iterative
 history plots, and a flow visualization slide that works with Paraview.
-:numref:`fig-pyfun-ex02-slice-y0` shows an example of this Paraview image from
+:numref:`fig-pykes-ex02-slice-y0` shows an example of this Paraview image from
 case 17 (``bullet/m1.50a4.0b0.0``).
 
-    .. _fig-pyfun-ex02-slice-y0:
+    .. _fig-pykes-ex02-slice-y0:
     .. figure:: m1.50a4.0b0.0/slice-y0.png
         :width: 4.0 in
         
@@ -230,10 +214,10 @@ installation.
 The report also includes axial force coefficient (*CA*), side force coefficient
 (*CY*), and normal force (*CY*) coefficient on both ``bullet_no_base`` and
 ``cap``.  The ``bullet_no_base`` component includes bot the rounded nose
-``cap`` and the cylindrical portion.  :numref:`fig-pyfun-ex02-bullet-CN` shows
+``cap`` and the cylindrical portion.  :numref:`fig-pykes-ex02-bullet-CN` shows
 one of these plots.
 
-    .. _fig-pyfun-ex02-bullet-CN:
+    .. _fig-pykes-ex02-bullet-CN:
     .. figure:: m1.50a4.0b0.0/bullet_CN.png
         :width: 3.2 in
         
@@ -241,13 +225,13 @@ one of these plots.
         coefficient (*CN*) for ``bullet/m1.50a4.0b0.0``
 
 In addition, there is a plot of overall pitching moment coefficient, and a
-residual plot.  Both :numref:`fig-pyfun-ex02-bullet-CN` and
-:numref:`fig-pyfun-ex02-L2` show a big change of behavior at iteration 50, when
+residual plot.  Both :numref:`fig-pykes-ex02-bullet-CN` and
+:numref:`fig-pykes-ex02-L2` show a big change of behavior at iteration 50, when
 the first-order iterations end.  The residual history also shows a change of
 behavior at iteration 75; the residual stops dropping for a while while the
 fluxes are frozen.
 
-    .. _fig-pyfun-ex02-L2:
+    .. _fig-pykes-ex02-L2:
     .. figure:: m1.50a4.0b0.0/L2.png
         :width: 3.2 in
         
@@ -318,7 +302,7 @@ the *ImageFile* option from the JSON subfigure definition.
 
 Aerodynamic Data Book and Sweep Plots
 -------------------------------------
-The provided example in ``$PYCART/examples/pyfun/02_bullet/`` includes an
+The provided example in ``$PYCART/examples/pykes/02_bullet/`` includes an
 aerodynamic database for all but two of the 24 conditions in the
 ``data/bullet`` folder.  The contents of an aero data book file are the same
 here as for Cart3D, and a selection of text from the main ``bullet_no_base``
@@ -368,11 +352,11 @@ iteration 150 are allowed to be included.
         }
         
 
-Running the command ``pyfun --aero`` will fill in the other two cases.
+Running the command ``pykes --aero`` will fill in the other two cases.
 
     .. code-block:: console
     
-        $ pyfun -I 3: --aero
+        $ pykes -I 3: --aero
         bullet/m0.80a30.0b0.0
           Adding new databook entry at iteration 200.
         bullet/m0.95a0.0b0.0
@@ -400,10 +384,10 @@ Running the command ``pyfun --aero`` will fill in the other two cases.
 The ``pyFun.json`` ``"Report"`` section also includes a Mach sweep figure.
 Details of the Mach sweep (with an angle of attack carpet plot) are the same as
 in the Cart3D example :ref:`pycart-ex-data-arrow`, but
-:numref:`fig-pyfun-ex02-mach-cap-CN` gives an example of one of the plots from
+:numref:`fig-pykes-ex02-mach-cap-CN` gives an example of one of the plots from
 the resulting ``report-mach.pdf``.
 
-    .. _fig-pyfun-ex02-mach-cap-CN:
+    .. _fig-pykes-ex02-mach-cap-CN:
     .. figure:: b0/mach_cap_CN.png
         :width: 3.5 in
         
@@ -413,7 +397,7 @@ To generate this report, issue the following command:
 
     .. code-block:: console
     
-        $ pyfun --report mach
+        $ pykes --report mach
         mach/bullet/m0.80a0.0b0.0
           SweepConds: New subfig
           SweepList: New subfig
@@ -430,8 +414,8 @@ To generate this report, issue the following command:
         Compiling...
         Cleaning up...
 
-Actually, :numref:`fig-pyfun-ex02-mach-cap-CN` is missing two data points (one
+Actually, :numref:`fig-pykes-ex02-mach-cap-CN` is missing two data points (one
 of these is obvious while the other is somewhat hidden).  If the user has run
-the suggested ``pyfun --aero`` command from earlier, the resulting plots will
+the suggested ``pykes --aero`` command from earlier, the resulting plots will
 include these two missing points.
 
